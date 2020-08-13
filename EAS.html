@@ -1,8 +1,59 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" src="EAS.css">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="EAS.css">
 </head>
 <body>
+    <div class=container>
+    </div>
+    <script>
+        let num = 16;
+        let num2 = (num * num);
+        const container = document.querySelector('div.container');
+        const button = document.createElement('button');
+        button.textContent = 'New Grid';
+        button.classList.add('newGrid');
+        container.appendChild(button);
+
+        function normalProcess() {
+            for (i = 0; i < num2; i++) {
+                const gridItem = document.createElement('div');
+                gridItem.classList.add('gridItem');
+                container.appendChild(gridItem);
+            };
+
+            const containers = document.querySelectorAll('.gridItem');
+            containers.forEach((div) => {
+                div.addEventListener('mouseenter', function(e) {
+                    div.style.backgroundColor = "gray";
+                });
+            });
+        }
+
+        normalProcess();
+
+        function clearGrid() {
+            const gridItems = document.querySelectorAll('.gridItem');
+                gridItems.forEach((div) => {
+                    container.removeChild(div);
+            });
+            container.style.gridTemplateRows = 'initial';
+            container.style.gridTemplateColumns = 'initial';
+        }
+
+        button.addEventListener('click', function (e) {
+            clearGrid();
+            num = prompt('How many Squares per Side?', 16); 
+            container.style.gridTemplateRows = `repeat(${num}, auto)`;
+            container.style.gridTemplateColumns = `repeat(${num}, auto)`;
+            for (i = 0; i < (num * num); i++) {
+                const gridItem = document.createElement('div');
+                gridItem.classList.add('gridItem');
+                container.appendChild(gridItem);
+            }
+        });
+
+    </script>
 </body>
 </html>
